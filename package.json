@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "build": "./node_modules/.bin/gulp build && lein clean && lein uberjar",
+    "watch": "./node_modules/.bin/gulp watch"
+  },
+  "devDependencies": {
+    "gulp": "3.9.1",
+    "gulp-autoprefixer": "3.1.0",
+    "gulp-ruby-sass": "2.0.6",
+    "gulp-sourcemaps": "1.6.0"
+  }
+}

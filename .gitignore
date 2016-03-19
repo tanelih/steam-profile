@@ -1,0 +1,10 @@
+figwheel_server.log
+
+.sass-cache/
+
+target/
+node_modules/
+
+resources/public/js
+resources/public/css
+
