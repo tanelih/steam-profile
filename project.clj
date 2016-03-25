@@ -1,9 +1,13 @@
 (defproject steam-profile "0.1.0-SNAPSHOT"
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/clojurescript "1.7.228"]
+                 [org.clojure/core.async "0.2.374"]
+                 [org.clojure/clojurescript "1.8.34"]
                  [ring/ring-core "1.4.0"]
+                 [environ "1.0.2"]
                  [compojure "1.4.0"]
-                 [http-kit "2.1.19"]]
+                 [http-kit "2.1.19"]
+                 [reagent "0.5.1"]
+                 [secretary "1.2.3"]]
 
   :plugins [[lein-ring "0.9.7"]
             [lein-cljsbuild "1.1.2"]

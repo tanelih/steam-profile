@@ -1,6 +1,30 @@
+$bg-color: #453E57
+$fg-color: #CDCCD5
+
 html, body
   margin:  0
   padding: 0
 
   min-width:  100vw
   min-height: 100vh
+
+  background-color: $bg-color
+
+article.view
+  display:        flex
+  flex-direction: column
+
+  min-height: 100vh
+
+  header.view-header
+    flex: 0 1 128px
+    color: $fg-color
+
+  section.view-content
+    flex: 1 0 auto
+    color:            $bg-color
+    background-color: $fg-color
+
+  footer.view-footer
+    flex: 0 1 256px
+    color: $fg-color

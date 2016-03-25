@@ -1,3 +1,4 @@
+.env
 figwheel_server.log
 
 .sass-cache/
@@ -7,4 +8,3 @@ node_modules/
 
 resources/public/js
 resources/public/css
-
