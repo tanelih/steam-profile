@@ -1,30 +1,22 @@
 (ns steam-profile.server.core
   (:gen-class)
-  (:require [compojure.core            :refer :all]
-            [environ.core              :refer [env]]
-            [org.httpkit.server        :refer [run-server]]
-            [ring.util.response        :refer [redirect resource-response]]
-            [ring.middleware.resource  :refer [wrap-resource]]
-            [ring.middleware.file-info :refer [wrap-file-info]]))
+  (:require [compojure.core :refer [GET context defroutes]]
+            [environ.core :refer [env]]
+            [org.httpkit.server :refer [run-server]]
+            [ring.middleware.resource :refer [wrap-resource]]
+            [ring.middleware.file-info :refer [wrap-file-info]]
+            [steam-profile.server.handlers :as handlers]
+            [ring.middleware.json :refer [wrap-json-response]]))
 
 
-(defn parse-int [str] (Integer/parseInt str))
-
-(def port (parse-int (env :port)))
-(def steam-api-key (env :steam-api-key))
-
-
-(defn render-app []
-  (resource-response "index.html" {:root "public"}))
-
-(defn get-profile [name] (println name))
+(def port (Integer/parseInt (env :port)))
 
 (defroutes route-map
-  (GET "/"              []     (render-app))
-  (GET "/profile/:name" [name] (get-profile name)))
-
+  (GET "/" [] (fn [req] (handlers/render-app)))
+  (context "/api" []
+    (GET "/profile/:name" [name] (fn [req] (handlers/get-profile name)))))
 
 (def application
-  (-> route-map (wrap-resource "public") (wrap-file-info)))
+  (-> route-map (wrap-json-response) (wrap-resource "public") (wrap-file-info)))
 
 (defn -main [] (run-server application {:port port}))

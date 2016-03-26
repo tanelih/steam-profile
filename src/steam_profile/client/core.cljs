@@ -2,16 +2,13 @@
   (:import [steam-profile.client.views index])
   (:require [reagent.core                 :as reagent]
             [secretary.core               :as secretary :refer-macros [defroute]]
-            [steam-profile.client.history :as history]
-            [steam-profile.client.request :as request]))
+            [steam-profile.client.api     :as api]
+            [steam-profile.client.history :as history]))
 
 (enable-console-print!)
 
-(defn do-thing []
-  (request/do-thing))
-
-(defn do-series []
-  (request/do-series))
+(defn get-profile [name]
+  (api/get-profile name))
 
 (defonce route-state-defaults {:view index/view :params {}})
 
@@ -28,3 +25,5 @@
 
 (history/start!)
 (reagent/render [router] (js/document.getElementById "app"))
+
+(get-profile "oscopter")

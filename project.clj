@@ -4,8 +4,11 @@
                  [org.clojure/clojurescript "1.8.34"]
                  [ring/ring-core "1.4.0"]
                  [environ "1.0.2"]
+                 [cljs-http "0.1.39"]
+                 [ring/ring-json "0.4.0"]
                  [compojure "1.4.0"]
                  [http-kit "2.1.19"]
+                 [cheshire "5.5.0"]
                  [reagent "0.5.1"]
                  [secretary "1.2.3"]]
 
