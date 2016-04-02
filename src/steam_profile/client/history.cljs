@@ -11,9 +11,15 @@
     (.setUseFragment false)
     (.setPathPrefix (str js/window.location.protocol "//" js/window.location.host))))
 
+
+(defonce history (make-history))
+
+
 (defn start! []
-  (doto (make-history)
+  (doto history
     (events/listen EventType.NAVIGATE
       #(secretary/dispatch! (get-token)))
     (.setEnabled true)
     (.setToken (get-token))))
+
+(defn navigate [path] (.setToken history path))

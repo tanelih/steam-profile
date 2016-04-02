@@ -10,6 +10,7 @@
                  [http-kit "2.1.19"]
                  [cheshire "5.5.0"]
                  [reagent "0.5.1"]
+                 [re-frame "0.7.0"]
                  [secretary "1.2.3"]]
 
   :plugins [[lein-ring "0.9.7"]
