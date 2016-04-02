@@ -1,0 +1,46 @@
+$bg-color: #2C363F
+$fg-color: #F2F5EA
+
+@mixin spinner()
+  font-size: 10px
+  margin: 64px auto
+  text-indent: -9999em
+  width: 124px
+  height: 124px
+  border-radius: 50%
+  background: $fg-color
+  background: linear-gradient(to right, $fg-color 10%, rgba(255, 255, 255, 0) 42%)
+  position: relative
+  animation: spin 1.4s infinite linear
+  transform: translateZ(0)
+
+  &::before
+    width: 50%
+    height: 50%
+    background: $fg-color
+    border-radius: 100% 0 0 0
+    position: absolute
+    top: 0
+    left: 0
+    content: ""
+
+  &::after
+    background: $bg-color
+    width: 90%
+    height: 90%
+    border-radius: 50%
+    content: ""
+    margin: auto
+    position: absolute
+    top: 0
+    left: 0
+    bottom: 0
+    right: 0
+
+
+@keyframes spin
+  0%
+    transform: rotate(0deg)
+
+  100%
+    transform: rotate(360deg)

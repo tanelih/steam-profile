@@ -1,30 +1,91 @@
-$bg-color: #453E57
-$fg-color: #CDCCD5
+@import "spinner.sass"
+
+$bg-color: #2C363F
+$fg-color: #F2F5EA
 
 html, body
   margin:  0
-  padding: 0
+  padding: 24px 0px
 
   min-width:  100vw
   min-height: 100vh
 
+  font-family: Helvetica, sans-serif
   background-color: $bg-color
 
-article.view
+/**
+ * mixins
+ */
+
+@mixin view()
   display:        flex
   flex-direction: column
 
+  width:      1024px
+  max-width:  80%
+  margin:     auto
   min-height: 100vh
 
-  header.view-header
-    flex: 0 1 128px
-    color: $fg-color
+  background-color: $fg-color
 
-  section.view-content
-    flex: 1 0 auto
-    color:            $bg-color
-    background-color: $fg-color
+@mixin reset()
+  margin: 0
+  padding: 0
 
-  footer.view-footer
-    flex: 0 1 256px
-    color: $fg-color
+/**
+ * actual stuff
+ */
+
+article.view-index
+  @include view()
+
+article.view-profile
+  @include view()
+
+  section.profile
+    width: 100%
+
+
+    section.avatar
+      width:  136px
+      height: 136px
+
+      margin: 0 auto
+      margin-top: 64px
+      margin-bottom: 16px
+
+      position:      relative
+      border-radius: 50%
+
+      background-color: $bg-color
+
+      section.spinner
+        top: 4
+        @include spinner()
+
+      img
+        height:        128px
+        border-radius: 50%
+
+        top:      4
+        left:     4
+        position: absolute
+
+        animation: 1s show
+
+    section.name
+      color: $bg-color
+      text-align: center
+
+      animation: 1s show 
+
+      h1
+        @include reset()
+        text-transform: uppercase
+
+@keyframes show
+  0%
+    opacity: 0
+
+  100%
+    opacity: 1

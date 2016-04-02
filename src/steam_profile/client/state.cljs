@@ -18,6 +18,11 @@
     (reaction (:route @state))))
 
 (reframe/register-sub
+  :loading
+  (fn [state _]
+    (reaction (:loading? @state))))
+
+(reframe/register-sub
   :profile
   (fn [state _]
     (reaction (:profile @state))))

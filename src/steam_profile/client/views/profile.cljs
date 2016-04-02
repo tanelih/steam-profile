@@ -1,14 +1,23 @@
 (ns steam-profile.client.views.profile
-  (:require [reagent.core :as reagent]
-            [re-frame.core :as reframe]
-            [steam-profile.client.utils :as u]
-            [steam-profile.client.history :refer [navigate]]))
+  (:require [re-frame.core :as reframe]))
+
 
 (defn view [params]
   (reframe/dispatch [:load-profile (:name params)])
-  (let [profile (reframe/subscribe [:profile])]
+
+  (let [profile             (reframe/subscribe [:profile])
+        is-loading-profile? (reframe/subscribe [:loading])]
+
     (fn []
-      (u/log @profile)
-      [:article
-        [:pre {:style {:color "white"}}
-          (u/to-string @profile)]])))
+      (if @is-loading-profile?
+        [:article.view-profile
+          [:section.profile
+            [:section.avatar
+              [:section.spinner]]]]
+
+        [:article.view-profile
+          [:section.profile
+            [:section.avatar
+              [:img {:src (:avatarfull @profile)}]]
+            [:section.name
+              [:h1 (:personaname @profile)]]]]))))

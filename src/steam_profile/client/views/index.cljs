@@ -11,7 +11,7 @@
 (defn view []
   (let [name (reagent/atom "")]
     (fn []
-      [:article
+      [:article.view-search
         [:header
           [:h1 "Steam Profile"]]
         [:section
