@@ -45,5 +45,4 @@
 (reframe/register-handler
   :receive-profile
   (fn [state [_ profile]]
-    (println profile)
     (assoc state :profile profile :loading? false)))
