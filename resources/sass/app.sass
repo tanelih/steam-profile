@@ -3,30 +3,21 @@
 $bg-color: #2C363F
 $fg-color: #F2F5EA
 
-html, body
-  margin:  0
-  padding: 24px 0px
-
-  min-width:  100vw
-  min-height: 100vh
-
-  font-family: Helvetica, sans-serif
-  background-color: $bg-color
-
 /**
  * mixins
  */
 
-@mixin view()
+@mixin profile()
+  flex: 1 0 auto
+
   display:        flex
   flex-direction: column
 
-  width:      1024px
-  max-width:  80%
-  margin:     auto
-  min-height: 100vh
+  width:     1024px
+  max-width: 80%
 
-  background-color: $fg-color
+  margin:  0 auto
+  padding: 64px 0
 
 @mixin reset()
   margin: 0
@@ -36,32 +27,45 @@ html, body
  * actual stuff
  */
 
-article.view-index
-  @include view()
+html, body
+  @include reset()
+
+  font-family:      Helvetica, sans-serif
+  background-color: $bg-color
+
+#app
+  display: flex
+  flex-direction: column
+
+  min-width:  100vw
+  min-height: 100vh
 
 article.view-profile
-  @include view()
+  @include profile()
+
+  section.content
+    flex:             1 0 auto
+    animation:        slide-up 0.8s ease-in-out
+    background-color: $fg-color
+
+    *
+      animation: fade-in 1.6s ease-in-out
 
   section.profile
     width: 100%
-
 
     section.avatar
       width:  136px
       height: 136px
 
       margin: 0 auto
-      margin-top: 64px
+      margin-top:    64px
       margin-bottom: 16px
 
       position:      relative
       border-radius: 50%
 
       background-color: $bg-color
-
-      section.spinner
-        top: 4
-        @include spinner()
 
       img
         height:        128px
@@ -71,21 +75,26 @@ article.view-profile
         left:     4
         position: absolute
 
-        animation: 1s show
-
     section.name
       color: $bg-color
       text-align: center
 
-      animation: 1s show 
+      animation: 1s show
 
       h1
         @include reset()
         text-transform: uppercase
 
-@keyframes show
+@keyframes fade-in
   0%
     opacity: 0
-
+  50%
+    opacity: 0
   100%
     opacity: 1
+
+@keyframes slide-up
+  0%
+    margin-top: 100vh
+  100%
+    margin-top: 0

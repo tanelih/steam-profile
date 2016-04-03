@@ -10,14 +10,11 @@
 
     (fn []
       (if @is-loading-profile?
+        [:article.view-loading]
         [:article.view-profile
-          [:section.profile
-            [:section.avatar
-              [:section.spinner]]]]
-
-        [:article.view-profile
-          [:section.profile
-            [:section.avatar
-              [:img {:src (:avatarfull @profile)}]]
-            [:section.name
-              [:h1 (:personaname @profile)]]]]))))
+          [:section.content
+            [:section.profile
+              [:section.avatar
+                [:img {:src (:avatarfull @profile)}]]
+              [:section.name
+                [:h1 (:personaname @profile)]]]]]))))

@@ -23,3 +23,6 @@
   (history/start!)
   (reframe/dispatch-sync [:initialize])
   (reagent/render [router] (js/document.getElementById "app")))
+
+(defn on-fig-reload []
+  (reagent/render [router] (js/document.getElementById "app")))

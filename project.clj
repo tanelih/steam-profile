@@ -30,7 +30,7 @@
              :ring-handler steam-profile.server.core/application}
 
   :cljsbuild {:builds [{:id "development"
-                        :figwheel true
+                        :figwheel {:on-jsload "steam-profile.client.core/on-fig-reload"}
                         :source-paths ["src"]
                         :compiler {:main steam-profile.client.core
                                    :asset-path "js/compiled/out"
