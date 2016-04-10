@@ -17,6 +17,10 @@
   (request {:url "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002"
             :query-params {:key steam-api-key :steamids steam-id}}))
 
+(defn- get-steam-friends [steam-id]
+  (request {:url "http://api.steampowered.com/ISteamUser/GetFriendList/v0001"
+            :query-params {:key steam-api-key :steamid steam-id :relationship "friend"}}))
+
 
 (defn render-app []
   (resource-response "index.html" {:root "public"}))
@@ -32,3 +36,20 @@
       (first
         (get-in
           (json/parse-string (:body res) true) [:response :players])))))
+
+(defn get-friend-list [name]
+  (let [res (<!! (request-series [(fn [res]
+                                    (resolve-vanity-url name))
+                                  (fn [res]
+                                    (let [data     (json/parse-string (:body res) true)
+                                          steam-id (get-in data [:response :steamid])]
+                                      (get-steam-friends steam-id)))
+                                  (fn [res]
+                                    (let [data      (json/parse-string (:body res) true)
+                                          friends   (get-in data [:friendslist :friends])
+                                          steam-ids (clojure.string/join ","
+                                                      (map :steamid friends))]
+                                      (get-steam-profile steam-ids)))]))]
+    (response
+      (get-in
+        (json/parse-string (:body res) true) [:response :players]))))

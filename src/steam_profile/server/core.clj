@@ -12,9 +12,10 @@
 (def port (Integer/parseInt (env :port)))
 
 (defroutes route-map
-  (GET "/" [] (fn [req] (handlers/render-app)))
   (context "/api" []
-    (GET "/profile/:name" [name] (fn [req] (handlers/get-profile name)))))
+    (GET "/profile/:name"         [name] (fn [req] (handlers/get-profile name)))
+    (GET "/profile/:name/friends" [name] (fn [req] (handlers/get-friend-list name))))
+  (GET "*" [] (fn [req] (handlers/render-app))))
 
 (def application
   (-> route-map (wrap-json-response) (wrap-resource "public") (wrap-file-info)))
